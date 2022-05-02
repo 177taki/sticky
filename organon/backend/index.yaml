@@ -1,0 +1,8 @@
+indexes:
+
+- kind: Pile
+  properties:
+  - name: Subscription
+  - name: Act.Uid
+  - name: Act.UnixTimestamp
+    direction: desc

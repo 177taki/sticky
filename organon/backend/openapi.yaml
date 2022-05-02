@@ -1,0 +1,121 @@
+swagger: "2.0"
+info:
+  description: "Organon Serice Front"
+  title: "Service Front"
+  version: "1.0.0"
+host: "organon-api.endpoints.organon-srv.cloud.goog"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+schemes:
+- "https"
+paths:
+  "/action/visit":
+    post:
+      description: "Record Info via visit action"
+      operationId: "visit"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      x-security:
+      - firebase:
+          audiences:
+          - "organon-srv"
+  "/action/browse":
+     post:
+       description: "Record Info via browse action"
+       operationId: "browse"
+       produces:
+       - "application/json"
+       responses:
+         200:
+           description: "Echo"
+           schema:
+             $ref: "#/definitions/echoMessage"
+       x-security:
+       - firebase:
+           audiences:
+           - "organon-srv"
+  "/stories":
+    get:
+      description: "Retrieve entries"
+      operationId: "stories"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      x-security:
+      - firebase:
+          audiences:
+          - "organon-srv"
+  "/stories/{id}/{subscribe}":
+    post:
+      description: "Subscribe"
+      operationId: "subscription"
+      parameters:
+      - name: "id"
+        in: path
+        type: string
+        required: true
+      - name: "subscribe"
+        in: path
+        type: string
+        required: true
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      x-security:
+      - firebase:
+          audiences:
+          - "organon-srv"
+  "/auth/info/firebase":
+    get:
+      description: "Returns the requests' authentication information."
+      operationId: "authInfoFirebase"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Authentication info."
+          schema:
+            $ref: "#/definitions/authInfoResponse"
+      x-security:
+      - firebase:
+          audiences:
+          - "organon-srv"
+definitions:
+  echoMessage:
+    properties:
+      message:
+        type: "string"
+  authInfoResponse:
+    properties:
+      id:
+        type: "string"
+      email:
+        type: "string"
+# This section requires all requests to any path to require an API key.
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+  firebase:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://securetoken.google.com/organon-srv"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"

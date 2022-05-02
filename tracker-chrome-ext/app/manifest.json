@@ -1,0 +1,49 @@
+{
+  "name": "Emitter milieu",
+  "short_name": "EM",
+  "description": "Emit feed urls",
+  "version": "0.1.9",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+	"browser_action": {
+		"default_icon": "images/icon-16.png",
+		"default_popup": "pages/signIn.html"
+	},
+  "background": {
+		"persistent": false,
+		"page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/feed_picker.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "identity",
+		"https://milieu-w.appspot.com/*",
+		"http://cloud.feedly.com/v3/*",
+		"http://api.hitonobetsu.com/ogp/analysis"
+  ],
+	"content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
+	"oauth2": {
+		"client_id": "client_id",
+		"scopes": [
+			"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.googleapis.com/auth/userinfo.profile"
+		]
+	},
+	"key": "key"
+}

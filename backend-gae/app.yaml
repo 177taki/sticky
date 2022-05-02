@@ -1,0 +1,13 @@
+application: milieu-w
+version: 1
+runtime: go
+api_version: go1
+
+handlers:
+- url: /apps/(.*)
+  static_files: milieu/apps/\1
+  upload: milieu/apps/.*
+- url: /try/.*
+  script: _go_app
+- url: /v0/api/.*
+  script: _go_app

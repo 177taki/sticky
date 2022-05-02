@@ -1,0 +1,24 @@
+runtime: go
+env: flex
+threadsafe: true
+
+manual_scaling:
+  instances: 1
+
+endpoints_api_service:
+  name: organon-api.endpoints.organon-srv.cloud.goog
+  config_id: 2017-02-24r0
+
+env_variables:
+  KIND: Pile
+  FB_APPID: 11
+  FB_APPSECRET: 11
+  FB_REDIRECTURI: "https://organon-srv.firebaseapp.com/__/auth/handler"
+  FBSEARCH_RADIUS: 500
+  FBSEARCH_LIMIT: 100
+  TOPIC_ACTION_VISIT: action-visit
+  TOPIC_ACTION_BROWSE: action-browse
+  TOPIC_FACEBOOK_RESULTS: facebook-results
+  SUBSCRIPTION_ACTION_VISIT: subscribe-action-vist
+  SUBSCRIPTION_ACTION_BROWSE: subscribe-action-browse
+  SUBSCRIPTION_FACEBOOK_RESULTS: subscribe-facebook-results
